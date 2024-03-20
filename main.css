@@ -118,3 +118,35 @@
       font-size: 16px;
   }
 }
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  vertical-align: middle;
+}
+
+.animation-group {
+  position: relative;
+}
+
+.first-image {
+  margin-top: 200px;
+}
+
+.animate-cover {
+  width: 100%;
+  height: 588px;
+  position: absolute;
+  background-color: white;
+
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+}
+
+.animate-cover.start {
+  width: 0;
+  transition: width 1.2s ease-in-out;
+}

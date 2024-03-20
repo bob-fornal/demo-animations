@@ -1,6 +1,7 @@
 class Animation {
   initial = ['item1', 'item2', 'item3'];
-  items = [];
+  size = ['3'];
+  items = ['item4', 'item5'];
 
   constructor() {
     this.init();
@@ -14,6 +15,12 @@ class Animation {
   };
 
   handleInitial = () => {
+    this.size.forEach((index) => {
+      const cover = document.getElementById(`item${index}`);
+      const figure = document.getElementById(`figure${index}`);
+      cover.setAttribute('style', `height: ${figure.clientHeight}px;`);
+    });
+
     this.initial.forEach((item) => {
       const element = document.getElementById(item);
       this.addStart(element);
@@ -22,11 +29,13 @@ class Animation {
 
   handleScroll = () => {
     const added = [];
-    this.items.forEach((item) => {
-      const scrollPosition = window.scrollY;
+    const scrollPosition = window.scrollY;
+    console.log('scroll position', scrollPosition);
 
+    this.items.forEach((item) => {
       const element = document.getElementById(item);
-      const element_height = element.offsetHeight;
+      const element_height = element.offsetHeight + 122;
+      console.log('item position', item, element_height);
 
       if (scrollPosition >= element_height) {
         this.addStart(element);
