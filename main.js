@@ -2,6 +2,7 @@ class Animation {
   initial = ['item1', 'item2', 'item3'];
   size = ['3'];
   items = ['item4', 'item5'];
+  addRemove = ['floaters'];
 
   constructor() {
     this.init();
@@ -43,6 +44,16 @@ class Animation {
       }
     });
     this.items = this.items.filter((item) => added.includes(item) === false);
+
+    this.addRemove.forEach((item) => {
+      const element = document.getElementById(item);
+      
+      if (scrollPosition >= 40) {
+        element.classList.add('show');
+      } else {
+        element.classList.remove('show');
+      }
+    });
   };
 
   addStart = (element) => {

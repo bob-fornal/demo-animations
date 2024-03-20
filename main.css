@@ -150,3 +150,33 @@ img, svg, video, canvas, audio, iframe, embed, object {
   width: 0;
   transition: width 1.2s ease-in-out;
 }
+
+.floaters {
+  position: fixed;
+  top: 160px;
+  right: 0;
+  max-width: 60px;
+  width: 0;
+}
+
+.floaters.show {
+  width: 60px;
+  transition: width 1.2s ease-in-out;
+}
+
+.floaters .right-menu.green {
+  background-color: green;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.floaters .right-menu.orange {
+  background-color: orange;
+  height: 50px;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid {
+  display: grid;
+}
