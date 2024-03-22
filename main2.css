@@ -1,0 +1,38 @@
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.horizontal-scroll-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.image-item {
+  margin: 1em;
+  cursor: pointer;
+}
+
+.img-item {
+  width: 267px;
+}
+
+.vertical-scroll {
+  position: fixed;
+  background-color: rgba(0, 0, 0, .65);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.outer-scroll {
+  background-color: white;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  width: 300px;
+  margin-left: calc(calc(100vw - 300px) / 2);
+  overflow-y: auto;
+  height: 100%;
+}
