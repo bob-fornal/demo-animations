@@ -1,7 +1,6 @@
 class Animation {
-  initial = ['item1', 'item2', 'item3'];
   size = ['3'];
-  items = ['item4', 'item5'];
+  items = ['#item1', '#item2', '#item3', '#item4', '#item5', '.item6'];
   addRemove = ['floaters'];
 
   constructor() {
@@ -10,38 +9,43 @@ class Animation {
 
   init = () => {
     window.addEventListener('scroll', this.handleScroll.bind(this));
-    setTimeout(() => {
-      this.handleInitial();
-    }, 500);
-  };
-
-  handleInitial = () => {
-    this.size.forEach((index) => {
-      const cover = document.getElementById(`item${index}`);
-      const figure = document.getElementById(`figure${index}`);
-      cover.setAttribute('style', `height: ${figure.clientHeight}px;`);
-    });
-
-    this.initial.forEach((item) => {
-      const element = document.getElementById(item);
-      this.addStart(element);
-    });
+    this.handleScroll();
   };
 
   handleScroll = () => {
     const added = [];
-    const scrollPosition = window.scrollY;
-    console.log('scroll position', scrollPosition);
+    const screenTop = window.scrollY;
+    const screenBottom = screenTop + document.body.clientHeight;
+    console.log('scroll position', screenBottom);
 
     this.items.forEach((item) => {
-      const element = document.getElementById(item);
-      const element_height = element.offsetHeight + 122;
-      console.log('item position', item, element_height);
+      const tag = this.cleanupTag(item);
+      if (item[0] === '#') { // ID-based
+        const element = document.getElementById(tag);
+        const elementTop = this.getPosition(element);
+        console.log('item position', item, elementTop);  
 
-      if (scrollPosition >= element_height) {
-        this.addStart(element);
-        added.push(item);
+        if (elementTop <= screenBottom) {
+          this.addStart(element);
+          added.push(item);
+        }  
+      } else { // Class-based
+        const elements = document.getElementsByClassName(tag);
+        console.log(item, elements.length);
+        for (let i = 0, len = elements.length; i < len; i++) {
+          const element = elements[i];
+          const elementTop = this.getPosition(element);
+          console.log('item position', item, elementTop);
+  
+          if (elementTop <= screenBottom) {
+            this.addStart(element);
+            if (added.includes(item) === false) {
+              added.push(item);
+            }
+          }
+        }
       }
+
     });
     this.items = this.items.filter((item) => added.includes(item) === false);
 
@@ -56,11 +60,18 @@ class Animation {
     });
   };
 
+  getPosition = (element) => {
+    const rectangle = element.getBoundingClientRect();
+    return document.body.scrollTop + rectangle.y + (rectangle.height / 2);
+  };
+
   addStart = (element) => {
     element.classList.add('start');
   };
 
-
+  cleanupTag = (tag) => {
+    return tag.slice(1, tag.length);
+  }
 }
 
 const animation = new Animation();

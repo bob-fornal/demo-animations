@@ -138,15 +138,37 @@ img, svg, video, canvas, audio, iframe, embed, object {
 
 .animate-cover {
   width: 100%;
-  height: 588px;
+  height: 600px;
   position: absolute;
   background-color: white;
+  /*
+    This attribute changes the direction of the width slide
+    right: 0; - left to right
+    left: 0; - right to left
+  */
+  right: 0;
 
   margin-inline-start: 40px;
   margin-inline-end: 40px;
 }
 
 .animate-cover.start {
+  width: 0;
+  transition: width 1.2s ease-in-out;
+}
+
+.animate-cover--rtl {
+  width: 100%;
+  height: 220px;
+  position: absolute;
+  background-color: white;
+  left: 0;
+
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+}
+
+.animate-cover--rtl.start {
   width: 0;
   transition: width 1.2s ease-in-out;
 }
@@ -179,4 +201,56 @@ img, svg, video, canvas, audio, iframe, embed, object {
 }
 .grid {
   display: grid;
+}
+
+@media (min-width: 1280px) {
+  .xl\:gap-7 {
+      gap: 1.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) {
+  .md\:gap-5 {
+      gap: 1.25rem;
+  }
+}
+@media (min-width: 768px) {
+  .md\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (min-width: 640px) {
+  .sm\:gap-7 {
+      gap: 1.75rem;
+  }
+}
+.gap-y-5 {
+    row-gap: 1.25rem;
+}
+.gap-x-3 {
+    -moz-column-gap: 0.75rem;
+    column-gap: 0.75rem;
+}
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid {
+    display: grid;
+}
+
+.five-column-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.25rem;
+}
+.size-205 {
+  width: 205px;
+}
+.size-205 img {
+  overflow-clip-margin: padding-box 0px;
 }
